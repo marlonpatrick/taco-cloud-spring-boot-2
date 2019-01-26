@@ -10,16 +10,16 @@ import com.marlonpatrick.tacocloud.taco.domain.IngredientRepository;
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
-  private IngredientRepository ingredientRepo;
+  private IngredientRepository ingredientRepository;
 
   @Autowired
   public IngredientByIdConverter(IngredientRepository ingredientRepo) {
-    this.ingredientRepo = ingredientRepo;
+    this.ingredientRepository = ingredientRepo;
   }
   
   @Override
   public Ingredient convert(String id) {
-    return ingredientRepo.findById(id);
+    return this.ingredientRepository.findById(id).orElse(null);
   }
 
 }

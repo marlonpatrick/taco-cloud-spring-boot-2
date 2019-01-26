@@ -27,6 +27,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+
+		<!-- Map entities: @Entity, @ManyToOne, etc... -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+		</dependency>
+
+		<!-- CrudRepository -->
+		<!-- <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-commons</artifactId> 
+			</dependency> -->
+
 	</dependencies>
 
 </project>
