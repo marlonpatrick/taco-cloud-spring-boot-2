@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.taco.domain;
+package com.marlonpatrick.tacocloud.taco.domain.model;
 
 import java.time.ZonedDateTime;
 import java.util.List;

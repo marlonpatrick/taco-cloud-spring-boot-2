@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.marlonpatrick.tacocloud.order.domain.Order;
-import com.marlonpatrick.tacocloud.taco.domain.Ingredient;
-import com.marlonpatrick.tacocloud.taco.domain.IngredientRepository;
-import com.marlonpatrick.tacocloud.taco.domain.IngredientTypes;
-import com.marlonpatrick.tacocloud.taco.domain.Taco;
-import com.marlonpatrick.tacocloud.taco.domain.TacoRepository;
+import com.marlonpatrick.tacocloud.order.domain.model.Order;
+import com.marlonpatrick.tacocloud.taco.domain.model.Ingredient;
+import com.marlonpatrick.tacocloud.taco.domain.model.IngredientRepository;
+import com.marlonpatrick.tacocloud.taco.domain.model.IngredientTypes;
+import com.marlonpatrick.tacocloud.taco.domain.model.Taco;
+import com.marlonpatrick.tacocloud.taco.domain.model.TacoRepository;
 
 @Controller
 @RequestMapping("/taco/design")

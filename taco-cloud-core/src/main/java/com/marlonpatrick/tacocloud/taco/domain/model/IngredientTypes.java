@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.taco.domain;
+package com.marlonpatrick.tacocloud.taco.domain.model;
 
 public enum IngredientTypes {
 

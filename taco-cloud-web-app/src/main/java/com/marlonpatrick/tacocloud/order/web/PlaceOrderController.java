@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.marlonpatrick.tacocloud.order.domain.Order;
-import com.marlonpatrick.tacocloud.order.domain.OrderRepository;
+import com.marlonpatrick.tacocloud.order.domain.model.Order;
+import com.marlonpatrick.tacocloud.order.domain.model.OrderRepository;
 
 
 @Controller

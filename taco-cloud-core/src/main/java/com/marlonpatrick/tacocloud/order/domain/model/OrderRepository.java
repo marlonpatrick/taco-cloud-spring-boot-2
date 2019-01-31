@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.order.domain;
+package com.marlonpatrick.tacocloud.order.domain.model;
 
 import java.util.Optional;
 

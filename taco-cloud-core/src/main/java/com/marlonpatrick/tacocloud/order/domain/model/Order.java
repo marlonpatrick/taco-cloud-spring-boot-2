@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.order.domain;
+package com.marlonpatrick.tacocloud.order.domain.model;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
-import com.marlonpatrick.tacocloud.taco.domain.Taco;
+import com.marlonpatrick.tacocloud.taco.domain.model.Taco;
 
 import lombok.Data;
 
