@@ -24,3 +24,5 @@ insert into Ingredient (id, name, type)
                 values ('SLSA', 'Salsa', 'SAUCE');
 insert into Ingredient (id, name, type) 
                 values ('SRCR', 'Sour Cream', 'SAUCE');
+
+--insert into USER values (-1, 'Salgueiro', 'Marlon Patrick', '$2a$10$IJbe91PBUzA0IKGGsVCIAePa.u16GCpg6Ii.Tqru5BX7axJFGc1U6', '81-99999-9999', 'PE', '44', 'marlon.patrick', '53400-600'); 
