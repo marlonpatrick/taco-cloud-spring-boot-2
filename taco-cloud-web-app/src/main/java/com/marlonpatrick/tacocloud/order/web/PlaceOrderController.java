@@ -2,6 +2,7 @@ package com.marlonpatrick.tacocloud.order.web;
 
 import javax.validation.Valid;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.marlonpatrick.tacocloud.order.domain.model.Order;
 import com.marlonpatrick.tacocloud.order.domain.model.OrderRepository;
+import com.marlonpatrick.tacocloud.user.domain.model.User;
 
 
 @Controller
@@ -33,11 +35,14 @@ public class PlaceOrderController {
 	
 	
 	@PostMapping
-	public String processPlaceOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus){
+	public String processPlaceOrder(@Valid Order order, Errors errors, 
+			SessionStatus sessionStatus, @AuthenticationPrincipal User user){
 		
 		if(errors.hasErrors()) {
 			return "order/placeOrder";			
 		}
+		
+		order.setUser(user);
 		
 		this.orderRepository.save(order);
 		

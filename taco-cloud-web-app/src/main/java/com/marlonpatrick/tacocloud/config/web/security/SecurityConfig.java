@@ -42,10 +42,10 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    .logout().logoutSuccessUrl("/");
 
 
-		//-----------------------ACCESS H2 CONSOLE
+//		//-----------------------ACCESS H2 CONSOLE
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
-		//-----------------------ACCESS H2 CONSOLE
+//		//-----------------------ACCESS H2 CONSOLE
 	}
 
 	@SuppressWarnings("unused")

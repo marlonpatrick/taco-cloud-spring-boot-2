@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
@@ -18,6 +19,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import com.marlonpatrick.tacocloud.taco.domain.model.Taco;
+import com.marlonpatrick.tacocloud.user.domain.model.User;
 
 import lombok.Data;
 
@@ -58,6 +60,9 @@ public class Order {
 
 	@ManyToMany(targetEntity = Taco.class)
 	private List<Taco> tacos = new ArrayList<>();
+	
+	@ManyToOne
+	private User user;
 
 	public void addTaco(Taco taco) {
 		this.tacos.add(taco);
