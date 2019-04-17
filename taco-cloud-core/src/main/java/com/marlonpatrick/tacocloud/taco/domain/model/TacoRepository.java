@@ -2,6 +2,9 @@ package com.marlonpatrick.tacocloud.taco.domain.model;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 public interface TacoRepository {
 
 	<S extends Taco> S save(S entity);
@@ -21,4 +24,6 @@ public interface TacoRepository {
 	void delete(Taco entity);
 
 	void deleteAll(Iterable<? extends Taco> entities);
+		
+	Page<Taco> findAllWithIngredients(Pageable pageable);
 }

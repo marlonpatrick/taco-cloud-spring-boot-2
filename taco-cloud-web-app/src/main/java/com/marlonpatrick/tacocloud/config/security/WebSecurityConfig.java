@@ -1,37 +1,34 @@
-package com.marlonpatrick.tacocloud.config.web.security;
+package com.marlonpatrick.tacocloud.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig extends WebSecurityConfigurerAdapter {
+class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
-	}
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		auth.userDetailsService(this.userDetailsService).passwordEncoder(this.passwordEncoder);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+			.antMatchers("/taco/recent").permitAll()
 			.antMatchers("/order/**", "/taco/**").authenticated()
 			.antMatchers("/user/register").anonymous()
 			.antMatchers("/login").anonymous()
@@ -43,16 +40,14 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 //		//-----------------------ACCESS H2 CONSOLE
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
+		http.csrf().ignoringAntMatchers("/h2-console/**").and()
+		.headers().frameOptions().disable();
 //		//-----------------------ACCESS H2 CONSOLE
 	}
 
 	@SuppressWarnings("unused")
 	private void inMemoryAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		PasswordEncoder passwordEncoder = passwordEncoder();
-
-		auth.inMemoryAuthentication().passwordEncoder(passwordEncoder).withUser("patrick")
+		auth.inMemoryAuthentication().passwordEncoder(this.passwordEncoder).withUser("patrick")
 				.password(passwordEncoder.encode("marlon")).authorities("ROLE_USER").and().withUser("marlon")
 				.password(passwordEncoder.encode("patrick")).authorities("ROLE_USER");
 	}

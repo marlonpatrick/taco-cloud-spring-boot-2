@@ -11,6 +11,7 @@
 		<module>taco-cloud-core</module>
 		<module>taco-cloud-infra</module>
 		<module>taco-cloud-web-app</module>
+		<module>taco-cloud-rest-app</module>
 	</modules>
 
 	<properties>

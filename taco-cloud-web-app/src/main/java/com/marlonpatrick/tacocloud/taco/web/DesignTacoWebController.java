@@ -26,14 +26,14 @@ import com.marlonpatrick.tacocloud.taco.domain.model.TacoRepository;
 @Controller
 @RequestMapping("/taco/design")
 @SessionAttributes("order")
-public class DesignTacoController {
+public class DesignTacoWebController {
 
 	private final IngredientRepository ingredientRepository;
 
 	private final TacoRepository tacoRepository;
 
 	@Autowired
-	public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
+	public DesignTacoWebController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
 		this.ingredientRepository = ingredientRepository;
 		this.tacoRepository = tacoRepository;
 	}

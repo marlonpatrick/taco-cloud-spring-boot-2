@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.config.web.security;
+package com.marlonpatrick.tacocloud.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
