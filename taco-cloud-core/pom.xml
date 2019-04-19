@@ -8,7 +8,7 @@
 		<artifactId>taco-cloud</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>taco-cloud-core</artifactId>
+	<artifactId>taco-cloud-domain</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>

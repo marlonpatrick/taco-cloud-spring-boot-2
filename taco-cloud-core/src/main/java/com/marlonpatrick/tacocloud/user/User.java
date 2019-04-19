@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.user.domain.model;
+package com.marlonpatrick.tacocloud.user;
 
 import java.util.Arrays;
 import java.util.Collection;

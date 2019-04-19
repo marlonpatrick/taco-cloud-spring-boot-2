@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.marlonpatrick.tacocloud.user.domain.model.User;
-import com.marlonpatrick.tacocloud.user.domain.model.UserRepository;
+import com.marlonpatrick.tacocloud.user.User;
+import com.marlonpatrick.tacocloud.user.UserRepository;
 
 @Service
 class TacoCloudUserDetailsService implements UserDetailsService {

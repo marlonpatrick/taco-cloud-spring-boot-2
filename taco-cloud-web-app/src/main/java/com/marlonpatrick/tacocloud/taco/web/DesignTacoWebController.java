@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.marlonpatrick.tacocloud.order.domain.model.Order;
-import com.marlonpatrick.tacocloud.taco.domain.model.Ingredient;
-import com.marlonpatrick.tacocloud.taco.domain.model.IngredientRepository;
-import com.marlonpatrick.tacocloud.taco.domain.model.IngredientTypes;
-import com.marlonpatrick.tacocloud.taco.domain.model.Taco;
-import com.marlonpatrick.tacocloud.taco.domain.model.TacoRepository;
+import com.marlonpatrick.tacocloud.order.Order;
+import com.marlonpatrick.tacocloud.taco.Ingredient;
+import com.marlonpatrick.tacocloud.taco.IngredientRepository;
+import com.marlonpatrick.tacocloud.taco.IngredientTypes;
+import com.marlonpatrick.tacocloud.taco.Taco;
+import com.marlonpatrick.tacocloud.taco.TacoApplicationService;
 
 @Controller
 @RequestMapping("/taco/design")
@@ -30,12 +30,14 @@ public class DesignTacoWebController {
 
 	private final IngredientRepository ingredientRepository;
 
-	private final TacoRepository tacoRepository;
+	private final TacoApplicationService tacoApplicationService;
 
 	@Autowired
-	public DesignTacoWebController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
+	public DesignTacoWebController(IngredientRepository ingredientRepository,
+			TacoApplicationService tacoApplicationService) {
+		
 		this.ingredientRepository = ingredientRepository;
-		this.tacoRepository = tacoRepository;
+		this.tacoApplicationService = tacoApplicationService;
 	}
 
 	@ModelAttribute(name = "order")
@@ -75,7 +77,7 @@ public class DesignTacoWebController {
 			return "taco/designTaco";
 		}
 
-		Taco saved = this.tacoRepository.save(taco);
+		Taco saved = this.tacoApplicationService.saveTaco(taco);
 		order.addTaco(saved);
 
 		return "redirect:/order/place/current";

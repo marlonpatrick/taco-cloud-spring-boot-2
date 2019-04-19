@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.marlonpatrick.tacocloud.taco.domain.model.Ingredient;
-import com.marlonpatrick.tacocloud.taco.domain.model.IngredientRepository;
+import com.marlonpatrick.tacocloud.taco.Ingredient;
+import com.marlonpatrick.tacocloud.taco.IngredientRepository;
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {

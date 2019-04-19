@@ -22,7 +22,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.marlonpatrick</groupId>
-			<artifactId>taco-cloud-core</artifactId>
+			<artifactId>taco-cloud-domain</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

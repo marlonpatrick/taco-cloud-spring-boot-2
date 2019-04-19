@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.taco.domain.model;
+package com.marlonpatrick.tacocloud.taco;
 
 import java.util.Optional;
 
@@ -7,10 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface TacoRepository {
 
-	<S extends Taco> S save(S entity);
-
-	<S extends Taco> Iterable<S> saveAll(Iterable<S> entities);
-
 	Optional<Taco> findById(Long id);
 
 	boolean existsById(Long id);
@@ -18,12 +14,19 @@ public interface TacoRepository {
 	Iterable<Taco> findAllById(Iterable<Long> ids);
 
 	long count();
+		
+	Page<Taco> findAllWithIngredients(Pageable pageable);
+}
+
+interface FullTacoRepository extends TacoRepository {
+
+	<S extends Taco> S save(S entity);
+
+	<S extends Taco> Iterable<S> saveAll(Iterable<S> entities);
 
 	void deleteById(Long id);
 
 	void delete(Taco entity);
 
 	void deleteAll(Iterable<? extends Taco> entities);
-		
-	Page<Taco> findAllWithIngredients(Pageable pageable);
 }

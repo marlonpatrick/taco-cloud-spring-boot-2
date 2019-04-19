@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TacoCloudPasswordEncoderFactory {
+class TacoCloudPasswordEncoderFactory {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

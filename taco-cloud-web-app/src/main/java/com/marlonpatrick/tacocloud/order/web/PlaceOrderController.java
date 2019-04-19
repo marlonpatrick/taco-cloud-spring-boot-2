@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.marlonpatrick.tacocloud.order.domain.model.Order;
-import com.marlonpatrick.tacocloud.order.domain.model.OrderRepository;
-import com.marlonpatrick.tacocloud.user.domain.model.User;
+import com.marlonpatrick.tacocloud.order.Order;
+import com.marlonpatrick.tacocloud.order.OrderApplicationService;
+import com.marlonpatrick.tacocloud.user.User;
 
 @Controller
 @RequestMapping("/order/place")
 @SessionAttributes("order")
 public class PlaceOrderController {
+	
+	private OrderApplicationService orderApplicationService;
 
-	private OrderRepository orderRepository;
-
-	public PlaceOrderController(OrderRepository orderRepository) {
-		this.orderRepository = orderRepository;
+	public PlaceOrderController(OrderApplicationService orderApplicationService) {
+		this.orderApplicationService = orderApplicationService;
 	}
 
 	@GetMapping("/current")
@@ -59,7 +59,7 @@ public class PlaceOrderController {
 
 		order.setUser(user);
 
-		this.orderRepository.save(order);
+		this.orderApplicationService.saveOrder(order);
 
 		sessionStatus.setComplete();
 

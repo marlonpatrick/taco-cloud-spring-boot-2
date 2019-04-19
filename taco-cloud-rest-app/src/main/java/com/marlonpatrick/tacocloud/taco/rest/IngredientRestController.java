@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marlonpatrick.tacocloud.taco.domain.model.Ingredient;
-import com.marlonpatrick.tacocloud.taco.domain.model.IngredientRepository;
+import com.marlonpatrick.tacocloud.taco.Ingredient;
+import com.marlonpatrick.tacocloud.taco.IngredientRepository;
 
 @RestController
 @RequestMapping(path="/ingredients", produces="application/json")

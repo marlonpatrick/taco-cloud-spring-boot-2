@@ -2,7 +2,7 @@ package com.marlonpatrick.tacocloud.user.web;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.marlonpatrick.tacocloud.user.domain.model.User;
+import com.marlonpatrick.tacocloud.user.User;
 
 import lombok.Data;
 
