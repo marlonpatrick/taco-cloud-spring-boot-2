@@ -21,7 +21,7 @@ import com.marlonpatrick.tacocloud.order.OrderRepository;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(produces = "application/json")
+@RequestMapping(path = "/orders", produces = "application/json")
 public class OrderRestController {
 
 	@Autowired
@@ -30,23 +30,23 @@ public class OrderRestController {
 	@Autowired
 	private OrderApplicationService orderApplicationService;
 
-	@GetMapping(path = "/orders")
+	@GetMapping
 	public Iterable<Order> allOrders() {
 		return orderRepository.findAll();
 	}
 
-	@PostMapping(path = "/order", consumes = "application/json")
+	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Order postOrder(@RequestBody Order order) {
 		return orderApplicationService.saveOrder(order);
 	}
 
-	@PutMapping(path = "/order/{orderId}", consumes = "application/json")
+	@PutMapping(path = "/{orderId}", consumes = "application/json")
 	public Order putOrder(@RequestBody Order order) {
 		return orderApplicationService.saveOrder(order);
 	}
 
-	@PatchMapping(path = "/order/{orderId}", consumes = "application/json")
+	@PatchMapping(path = "/{orderId}", consumes = "application/json")
 	public Order patchOrder(@PathVariable("orderId") Long orderId, @RequestBody Order patchOrder) {
 
 		Order order = orderRepository.findById(orderId).get();
@@ -80,7 +80,7 @@ public class OrderRestController {
 
 	}
 
-	@DeleteMapping("/order/{orderId}")
+	@DeleteMapping("/{orderId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void removeOrder(@PathVariable("orderId") Long orderId) {
 		try {

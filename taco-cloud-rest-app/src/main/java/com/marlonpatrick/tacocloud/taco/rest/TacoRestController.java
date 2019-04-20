@@ -27,7 +27,7 @@ import com.marlonpatrick.tacocloud.taco.TacoRepository;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(path = "/taco", produces = "application/json")
+@RequestMapping(path = "/tacos", produces = "application/json")
 public class TacoRestController {
 
 	@Autowired
