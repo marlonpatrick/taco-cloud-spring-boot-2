@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(path="tacos")
+@RepositoryRestResource(path="tacos", collectionResourceRel="tacos")
 interface JPATacoRepository extends FullTacoRepository, Repository<Taco, Long> {
 
 	//test spring data rest

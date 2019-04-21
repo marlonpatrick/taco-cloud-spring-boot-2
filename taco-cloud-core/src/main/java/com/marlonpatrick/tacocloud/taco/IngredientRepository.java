@@ -17,14 +17,14 @@ public interface IngredientRepository {
 
 interface FullIngredientRepository extends IngredientRepository {
 
-//	<S extends Ingredient> S save(S entity);
-//
-//	<S extends Ingredient> Iterable<S> saveAll(Iterable<S> entities);
-//
-//	void deleteById(String id);
-//	
-//	void delete(Ingredient entity);
-//	
-//	void deleteAll(Iterable<? extends Ingredient> entities);
+	<S extends Ingredient> S save(S entity);
+
+	<S extends Ingredient> Iterable<S> saveAll(Iterable<S> entities);
+
+	void deleteById(String id);
+	
+	void delete(Ingredient entity);
+	
+	void deleteAll(Iterable<? extends Ingredient> entities);
 	
 }
