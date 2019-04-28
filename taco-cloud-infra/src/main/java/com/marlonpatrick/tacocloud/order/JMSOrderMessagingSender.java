@@ -21,7 +21,7 @@ class JMSOrderMessagingSender implements OrderMessagingSenderGateway {
 				});
 	}
 	
-	public void sendOrder2(Order order) {
+	void sendOrder2(Order order) {
 		this.jmsTemplate.send("tacocloud.order.queue", session -> {
 		
 			Message message = session.createObjectMessage(order);

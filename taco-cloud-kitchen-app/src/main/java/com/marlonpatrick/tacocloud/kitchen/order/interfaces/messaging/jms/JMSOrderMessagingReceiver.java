@@ -17,7 +17,7 @@ public class JMSOrderMessagingReceiver implements OrderMessagingReceiverGateway 
 	@Override
 	@Transactional
 	public void receiveOrder() {
-		System.out.println("OrderReceiver...");
+		System.out.println("JMSOrderReceiver...");
 		
 		Order order = (Order) jmsTemplate.receiveAndConvert("tacocloud.order.queue");
 		System.out.println(order);
