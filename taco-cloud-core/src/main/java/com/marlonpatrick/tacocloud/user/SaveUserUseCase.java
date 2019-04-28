@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 class SaveUserUseCase {
 
-	private FullUserRepository userRepository;
+	private FullUserRepositoryGateway userRepository;
 
-	public SaveUserUseCase(FullUserRepository userRepository) {
+	public SaveUserUseCase(FullUserRepositoryGateway userRepository) {
 		this.userRepository = userRepository;
 	}
 

@@ -7,6 +7,7 @@ questions.txt
 /taco-cloud-infra/target/
 /taco-cloud-web-app/target/
 /taco-cloud-rest-app/target/
+/taco-cloud-kitchen-app/target/
 
 ### STS ###
 .apt_generated

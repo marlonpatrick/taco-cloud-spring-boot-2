@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 class SaveTacoUseCase {
 
-	private FullTacoRepository tacoRepository;
+	private FullTacoRepositoryGateway tacoRepository;
 
-	public SaveTacoUseCase(FullTacoRepository tacoRepository) {
+	public SaveTacoUseCase(FullTacoRepositoryGateway tacoRepository) {
 		this.tacoRepository = tacoRepository;
 	}
 

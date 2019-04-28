@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 class RemoveIngredientUseCase {
 
-	private FullIngredientRepository ingredientRepository;
+	private FullIngredientRepositoryGateway ingredientRepository;
 
-	public RemoveIngredientUseCase(FullIngredientRepository ingredientRepository) {
+	public RemoveIngredientUseCase(FullIngredientRepositoryGateway ingredientRepository) {
 		this.ingredientRepository = ingredientRepository;
 	}
 

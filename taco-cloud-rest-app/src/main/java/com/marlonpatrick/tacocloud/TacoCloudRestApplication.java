@@ -9,6 +9,5 @@ public class TacoCloudRestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TacoCloudRestApplication.class, args);
 	}
-
 }
 

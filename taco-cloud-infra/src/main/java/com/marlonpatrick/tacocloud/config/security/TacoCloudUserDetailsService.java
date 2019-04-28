@@ -7,15 +7,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.marlonpatrick.tacocloud.user.User;
-import com.marlonpatrick.tacocloud.user.UserRepository;
+import com.marlonpatrick.tacocloud.user.UserRepositoryGateway;
 
 @Service
 class TacoCloudUserDetailsService implements UserDetailsService {
 
-	private UserRepository userRepository;
+	private UserRepositoryGateway userRepository;
 
 	@Autowired
-	TacoCloudUserDetailsService(UserRepository userRepository) {
+	TacoCloudUserDetailsService(UserRepositoryGateway userRepository) {
 		this.userRepository = userRepository;
 	}
 
