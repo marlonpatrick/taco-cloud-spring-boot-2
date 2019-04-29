@@ -13,7 +13,7 @@ public class TacoCloudKitchenApplication {
 	}
 
 	@Bean
-	public ApplicationRunner getAppRunner() {
+	ApplicationRunner getAppRunner() {
 		return new TacoCloudKitchenApplicationRunner();
 	}
 }

@@ -6,7 +6,7 @@ import org.springframework.boot.ApplicationRunner;
 
 import com.marlonpatrick.tacocloud.kitchen.order.interfaces.messaging.OrderMessagingReceiverGateway;
 
-public class TacoCloudKitchenApplicationRunner implements ApplicationRunner {
+class TacoCloudKitchenApplicationRunner implements ApplicationRunner {
 
 	@Autowired
 	private OrderMessagingReceiverGateway orderMessagingReceiver;
@@ -14,7 +14,7 @@ public class TacoCloudKitchenApplicationRunner implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println("TacoCloudKitchenApplicationRunner started");
-		orderMessagingReceiver.receiveOrder();
+//		orderMessagingReceiver.receiveOrder();
 		System.out.println("TacoCloudKitchenApplicationRunner finished");
 	}
 }
