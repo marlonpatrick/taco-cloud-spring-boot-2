@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.marlonpatrick.tacocloud.order.Order;
 import com.marlonpatrick.tacocloud.taco.Ingredient;
-import com.marlonpatrick.tacocloud.taco.IngredientRepositoryGateway;
+import com.marlonpatrick.tacocloud.taco.IngredientApplicationService;
 import com.marlonpatrick.tacocloud.taco.IngredientTypes;
 import com.marlonpatrick.tacocloud.taco.Taco;
 import com.marlonpatrick.tacocloud.taco.TacoApplicationService;
@@ -28,15 +28,15 @@ import com.marlonpatrick.tacocloud.taco.TacoApplicationService;
 @SessionAttributes("order")
 public class DesignTacoWebController {
 
-	private final IngredientRepositoryGateway ingredientRepository;
+	private final IngredientApplicationService ingredientApplicationService;
 
 	private final TacoApplicationService tacoApplicationService;
 
 	@Autowired
-	public DesignTacoWebController(IngredientRepositoryGateway ingredientRepository,
+	public DesignTacoWebController(IngredientApplicationService ingredientApplicationService,
 			TacoApplicationService tacoApplicationService) {
 		
-		this.ingredientRepository = ingredientRepository;
+		this.ingredientApplicationService = ingredientApplicationService;
 		this.tacoApplicationService = tacoApplicationService;
 	}
 
@@ -55,7 +55,7 @@ public class DesignTacoWebController {
 
 		List<Ingredient> ingredients = new ArrayList<>();
 
-		this.ingredientRepository.findAll().forEach(i -> ingredients.add(i));
+		this.ingredientApplicationService.findAll().forEach(i -> ingredients.add(i));
 
 		IngredientTypes[] types = IngredientTypes.values();
 

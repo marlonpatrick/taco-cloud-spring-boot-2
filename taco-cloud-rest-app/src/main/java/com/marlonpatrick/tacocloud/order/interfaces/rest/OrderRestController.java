@@ -3,9 +3,9 @@ package com.marlonpatrick.tacocloud.order.interfaces.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.marlonpatrick.tacocloud.order.Order;
 import com.marlonpatrick.tacocloud.order.OrderApplicationService;
-import com.marlonpatrick.tacocloud.order.OrderRepositoryGateway;
+import com.marlonpatrick.tacocloud.taco.Ingredient;
+import com.marlonpatrick.tacocloud.taco.Taco;
 
 @RestController
 @CrossOrigin("*")
@@ -25,20 +26,31 @@ import com.marlonpatrick.tacocloud.order.OrderRepositoryGateway;
 public class OrderRestController {
 
 	@Autowired
-	private OrderRepositoryGateway orderRepository;
-
-	@Autowired
 	private OrderApplicationService orderApplicationService;
-
-	@GetMapping
-	public Iterable<Order> allOrders() {
-		return orderRepository.findAll();
-	}
 
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Order postOrder(@RequestBody Order order) {
 		return orderApplicationService.saveOrder(order);
+	}
+
+
+	@PostMapping(path = "fromEmail", consumes = "application/json")
+	@ResponseStatus(HttpStatus.CREATED)//fake
+	@Transactional(readOnly=true)
+	public Order postOrderFromEmail(@RequestBody String emailOrder) {
+		
+		System.out.println("EmailOrder\n" + emailOrder);
+		
+		Order order = orderApplicationService.findById(2L).orElse(null);
+		
+		for (Taco taco : order.getTacos()) {
+			for (Ingredient ingredient : taco.getIngredients()) {
+				System.out.println(ingredient.getName());
+			}
+		}
+		
+		return order;
 	}
 
 	@PutMapping(path = "/{orderId}", consumes = "application/json")
@@ -49,7 +61,7 @@ public class OrderRestController {
 	@PatchMapping(path = "/{orderId}", consumes = "application/json")
 	public Order patchOrder(@PathVariable("orderId") Long orderId, @RequestBody Order patchOrder) {
 
-		Order order = orderRepository.findById(orderId).get();
+		Order order = orderApplicationService.findById(orderId).get();
 
 		if (patchOrder.getDeliveryName() != null) {
 			order.setDeliveryName(patchOrder.getDeliveryName());
@@ -89,5 +101,4 @@ public class OrderRestController {
 			//
 		}
 	}
-
 }

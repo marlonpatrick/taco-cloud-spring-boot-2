@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.marlonpatrick.tacocloud.taco.Taco;
 import com.marlonpatrick.tacocloud.taco.TacoApplicationService;
-import com.marlonpatrick.tacocloud.taco.TacoRepositoryGateway;
 
 @RestController
 @CrossOrigin("*")
@@ -31,17 +30,11 @@ import com.marlonpatrick.tacocloud.taco.TacoRepositoryGateway;
 public class TacoRestController {
 
 	@Autowired
-	private TacoRepositoryGateway tacoRepository;
-
-	@Autowired
 	private TacoApplicationService tacoApplicationService;
-
-//	@Autowired
-//	private EntityLinks entityLinks;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
-		Optional<Taco> optTaco = tacoRepository.findById(id);
+		Optional<Taco> optTaco = tacoApplicationService.findById(id);
 
 		if (optTaco.isPresent()) {
 			return new ResponseEntity<>(optTaco.get(), HttpStatus.OK);
@@ -53,13 +46,13 @@ public class TacoRestController {
 	@GetMapping("/recent")
 	public Iterable<Taco> recentTacos() {
 		PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
-		return tacoRepository.findAllWithIngredients(page).getContent();
+		return tacoApplicationService.findAllWithIngredients(page).getContent();
 	}
 
 	@GetMapping("/recent/hateoas")
 	public Resources<TacoResource> recentTacosHateoas() {
 		PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
-		List<Taco> tacos = tacoRepository.findAllWithIngredients(page).getContent();
+		List<Taco> tacos = tacoApplicationService.findAllWithIngredients(page).getContent();
 
 		Resources<TacoResource> tacosResources = new Resources<>(TacoResourceAssembler.INSTANCE.toResources(tacos));
 		tacosResources.add(linkTo(methodOn(TacoRestController.class).recentTacosHateoas()).withRel("recents"));

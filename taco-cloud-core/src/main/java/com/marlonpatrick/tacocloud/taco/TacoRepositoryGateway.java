@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface TacoRepositoryGateway {
+interface TacoRepositoryGateway {
 
 	Optional<Taco> findById(Long id);
 
@@ -16,10 +16,7 @@ public interface TacoRepositoryGateway {
 	long count();
 		
 	Page<Taco> findAllWithIngredients(Pageable pageable);
-}
-
-interface FullTacoRepositoryGateway extends TacoRepositoryGateway {
-
+	
 	<S extends Taco> S save(S entity);
 
 	<S extends Taco> Iterable<S> saveAll(Iterable<S> entities);

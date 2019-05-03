@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.marlonpatrick.tacocloud.taco.Ingredient;
 import com.marlonpatrick.tacocloud.taco.IngredientApplicationService;
-import com.marlonpatrick.tacocloud.taco.IngredientRepositoryGateway;
 
 @RestController
 @RequestMapping(path = "/ingredients", produces = "application/json")
@@ -25,19 +24,11 @@ import com.marlonpatrick.tacocloud.taco.IngredientRepositoryGateway;
 public class IngredientRestController {
 
 	@Autowired
-	private IngredientRepositoryGateway ingredientRepository;
-
-	@Autowired
 	private IngredientApplicationService ingredientApplicationService;
-
-	@GetMapping
-	public Iterable<Ingredient> allIngredients() {
-		return ingredientRepository.findAll();
-	}
 
 	@GetMapping("/{id}")
 	public Optional<Ingredient> byId(@PathVariable("id") String id) {
-		return ingredientRepository.findById(id);
+		return ingredientApplicationService.findById(id);
 	}
 
 	@PostMapping

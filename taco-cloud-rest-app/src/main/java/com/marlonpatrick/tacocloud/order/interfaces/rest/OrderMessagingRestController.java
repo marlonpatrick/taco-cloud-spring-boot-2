@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marlonpatrick.tacocloud.order.Order;
+import com.marlonpatrick.tacocloud.order.OrderApplicationService;
 import com.marlonpatrick.tacocloud.order.OrderMessagingSenderGateway;
-import com.marlonpatrick.tacocloud.order.OrderRepositoryGateway;
 
 @RestController
 @CrossOrigin("*")
@@ -21,10 +21,7 @@ import com.marlonpatrick.tacocloud.order.OrderRepositoryGateway;
 public class OrderMessagingRestController {
 
 	@Autowired
-	private OrderRepositoryGateway orderRepository;
-
-//	@Autowired
-//	private OrderApplicationService orderApplicationService;
+	private OrderApplicationService orderApplicationService;
 
 	@Autowired
 	private OrderMessagingSenderGateway orderMessagingGateway;
@@ -32,7 +29,7 @@ public class OrderMessagingRestController {
 	@GetMapping("/send/{id}")
 	@Transactional(readOnly=true)
 	public String send(@PathVariable("id") Long id) {
-		Optional<Order> optionalOrder = orderRepository.findById(id);
+		Optional<Order> optionalOrder = orderApplicationService.findById(id);
 		Order order = optionalOrder.orElse(null);
 		order.setPlacedAt(ZonedDateTime.now());
 		order.setTacos(null);//many errors, try resolve posteriorly

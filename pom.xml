@@ -13,6 +13,7 @@
 		<module>taco-cloud-web-app</module>
 		<module>taco-cloud-rest-app</module>
 		<module>taco-cloud-kitchen-app</module>
+		<module>taco-cloud-integration-app</module>
 	</modules>
 
 	<properties>

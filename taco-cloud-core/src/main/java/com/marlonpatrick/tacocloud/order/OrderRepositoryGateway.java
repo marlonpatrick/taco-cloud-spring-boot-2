@@ -2,7 +2,7 @@ package com.marlonpatrick.tacocloud.order;
 
 import java.util.Optional;
 
-public interface OrderRepositoryGateway {
+interface OrderRepositoryGateway {
 
 	Optional<Order> findById(Long id);
 
@@ -13,10 +13,7 @@ public interface OrderRepositoryGateway {
 	Iterable<Order> findAllById(Iterable<Long> ids);
 
 	long count();
-}
-
-interface FullOrderRepositoryGateway extends OrderRepositoryGateway {
-
+	
 	<S extends Order> S save(S entity);
 
 	<S extends Order> Iterable<S> saveAll(Iterable<S> entities);

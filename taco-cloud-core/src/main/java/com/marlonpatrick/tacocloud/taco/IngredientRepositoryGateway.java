@@ -2,7 +2,7 @@ package com.marlonpatrick.tacocloud.taco;
 
 import java.util.Optional;
 
-public interface IngredientRepositoryGateway {
+interface IngredientRepositoryGateway {
 
 	Optional<Ingredient> findById(String id);
 
@@ -13,10 +13,7 @@ public interface IngredientRepositoryGateway {
 	Iterable<Ingredient> findAllById(Iterable<String> ids);
 
 	long count();
-}
-
-interface FullIngredientRepositoryGateway extends IngredientRepositoryGateway {
-
+	
 	<S extends Ingredient> S save(S entity);
 
 	<S extends Ingredient> Iterable<S> saveAll(Iterable<S> entities);
@@ -26,5 +23,4 @@ interface FullIngredientRepositoryGateway extends IngredientRepositoryGateway {
 	void delete(Ingredient entity);
 	
 	void deleteAll(Iterable<? extends Ingredient> entities);
-	
 }

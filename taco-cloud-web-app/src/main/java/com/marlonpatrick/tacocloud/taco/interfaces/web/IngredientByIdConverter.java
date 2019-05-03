@@ -5,21 +5,21 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import com.marlonpatrick.tacocloud.taco.Ingredient;
-import com.marlonpatrick.tacocloud.taco.IngredientRepositoryGateway;
+import com.marlonpatrick.tacocloud.taco.IngredientApplicationService;
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
-  private IngredientRepositoryGateway ingredientRepository;
+  private IngredientApplicationService ingredientApplicationService;
 
   @Autowired
-  public IngredientByIdConverter(IngredientRepositoryGateway ingredientRepo) {
-    this.ingredientRepository = ingredientRepo;
+  public IngredientByIdConverter(IngredientApplicationService ingredientApplicationService) {
+    this.ingredientApplicationService = ingredientApplicationService;
   }
   
   @Override
   public Ingredient convert(String id) {
-    return this.ingredientRepository.findById(id).orElse(null);
+    return this.ingredientApplicationService.findById(id).orElse(null);
   }
 
 }

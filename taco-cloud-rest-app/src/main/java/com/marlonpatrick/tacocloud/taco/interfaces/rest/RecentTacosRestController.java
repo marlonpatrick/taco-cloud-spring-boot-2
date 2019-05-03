@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.marlonpatrick.tacocloud.taco.Taco;
-import com.marlonpatrick.tacocloud.taco.TacoRepositoryGateway;
+import com.marlonpatrick.tacocloud.taco.TacoApplicationService;
 
 //@RestController
 //@CrossOrigin("*")
@@ -22,7 +22,7 @@ import com.marlonpatrick.tacocloud.taco.TacoRepositoryGateway;
 public class RecentTacosRestController {
 
 	@Autowired
-	private TacoRepositoryGateway tacoRepository;
+	private TacoApplicationService tacoApplicationService;
 	
 	@Autowired
 	private EntityLinks entityLinks;
@@ -31,7 +31,7 @@ public class RecentTacosRestController {
 	@GetMapping(path="/tacos/recent", produces="application/hal+json")
 	public ResponseEntity<Resources<TacoResource>> recentTacos() {
 		PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
-		List<Taco> tacos = tacoRepository.findAllWithIngredients(page).getContent();
+		List<Taco> tacos = tacoApplicationService.findAllWithIngredients(page).getContent();
 
 		Resources<TacoResource> tacosResources = new Resources<>(TacoResourceAssembler.INSTANCE.toResources(tacos));
 		

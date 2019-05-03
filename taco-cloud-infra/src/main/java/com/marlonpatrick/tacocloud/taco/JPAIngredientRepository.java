@@ -4,6 +4,6 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-interface JPAIngredientRepository extends FullIngredientRepositoryGateway, Repository<Ingredient, String> {
+interface JPAIngredientRepository extends IngredientRepositoryGateway, Repository<Ingredient, String> {
 
 }

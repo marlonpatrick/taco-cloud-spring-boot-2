@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 class SaveOrderUseCase {
 
-	private FullOrderRepositoryGateway orderRepository;
+	private OrderRepositoryGateway orderRepository;
 
-	public SaveOrderUseCase(FullOrderRepositoryGateway orderRepository) {
+	public SaveOrderUseCase(OrderRepositoryGateway orderRepository) {
 		this.orderRepository = orderRepository;
 	}
 
