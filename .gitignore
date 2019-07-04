@@ -3,7 +3,7 @@ questions.txt
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
-/taco-cloud-core/target/
+/taco-cloud-domain/target/
 /taco-cloud-infra/target/
 /taco-cloud-web-app/target/
 /taco-cloud-rest-app/target/
