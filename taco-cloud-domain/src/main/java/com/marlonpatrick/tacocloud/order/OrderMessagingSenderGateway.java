@@ -1,6 +1,6 @@
 package com.marlonpatrick.tacocloud.order;
 
-public interface OrderMessagingSenderGateway {
+interface OrderMessagingSenderGateway {
 
 	void sendOrder(Order order);
 

@@ -1,16 +1,14 @@
-package com.marlonpatrick.tacocloud.kitchen.order.interfaces.messaging.rabbit;
+package com.marlonpatrick.tacocloud.order.interfaces.messaging.rabbit;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 
-import com.marlonpatrick.tacocloud.kitchen.order.Order;
-import com.marlonpatrick.tacocloud.kitchen.order.interfaces.messaging.OrderMessagingReceiverGateway;
+import com.marlonpatrick.tacocloud.order.Order;
+import com.marlonpatrick.tacocloud.order.interfaces.messaging.OrderMessagingReceiverGateway;
 
 @Component
-@Primary
 public class RabbitOrderMessagingReceiver implements OrderMessagingReceiverGateway {
 
 	@Autowired

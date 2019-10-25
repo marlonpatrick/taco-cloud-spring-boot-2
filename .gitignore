@@ -7,7 +7,7 @@ questions.txt
 /taco-cloud-infra/target/
 /taco-cloud-web-app/target/
 /taco-cloud-rest-app/target/
-/taco-cloud-kitchen-app/target/
+/taco-cloud-messaging-receiver-app/target/
 /taco-cloud-integration-app/target/
 
 ### STS ###

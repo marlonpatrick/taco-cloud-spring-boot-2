@@ -1,5 +1,6 @@
 package com.marlonpatrick.tacocloud.order;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ public class OrderApplicationService {
 
 	@Autowired
 	private OrderRepositoryGateway orderRepositoryGateway;
+
+	@Autowired
+	private OrderMessagingSenderGateway orderMessagingGateway;
 
 	@Autowired
 	private SaveOrderUseCase saveOrderUseCase;
@@ -27,5 +31,16 @@ public class OrderApplicationService {
 	
 	public void removeOrder(Long orderId) {
 		this.removeOrderUseCase.execute(orderId);
+	}
+	
+	public void sendOrder(Long orderId) {
+		Optional<Order> optionalOrder = this.findById(orderId);
+		Order order = optionalOrder.get();
+		order.setPlacedAt(ZonedDateTime.now());
+		order.setTacos(null);//many errors, try resolve posteriorly
+//		for (Taco taco : order.getTacos()) {
+//			taco.getIngredients();
+//		}
+		orderMessagingGateway.sendOrder(order);
 	}
 }

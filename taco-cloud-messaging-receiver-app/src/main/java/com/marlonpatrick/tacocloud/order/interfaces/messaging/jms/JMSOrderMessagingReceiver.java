@@ -1,13 +1,15 @@
-package com.marlonpatrick.tacocloud.kitchen.order.interfaces.messaging.jms;
+package com.marlonpatrick.tacocloud.order.interfaces.messaging.jms;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.marlonpatrick.tacocloud.kitchen.order.Order;
-import com.marlonpatrick.tacocloud.kitchen.order.interfaces.messaging.OrderMessagingReceiverGateway;
+import com.marlonpatrick.tacocloud.order.Order;
+import com.marlonpatrick.tacocloud.order.interfaces.messaging.OrderMessagingReceiverGateway;
 
+@Primary
 @Component
 public class JMSOrderMessagingReceiver implements OrderMessagingReceiverGateway {
 

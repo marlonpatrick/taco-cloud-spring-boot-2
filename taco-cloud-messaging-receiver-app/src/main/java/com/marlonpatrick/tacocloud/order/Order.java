@@ -1,10 +1,10 @@
-package com.marlonpatrick.tacocloud.kitchen.order;
+package com.marlonpatrick.tacocloud.order;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.marlonpatrick.tacocloud.kitchen.taco.Taco;
+import com.marlonpatrick.tacocloud.taco.Taco;
 
 import lombok.Data;
 

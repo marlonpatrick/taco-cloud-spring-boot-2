@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.kitchen.config.messaging;
+package com.marlonpatrick.tacocloud.config.messaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.marlonpatrick.tacocloud.kitchen.order.Order;
+import com.marlonpatrick.tacocloud.order.Order;
 
 @Configuration
 class MessagingConfig {

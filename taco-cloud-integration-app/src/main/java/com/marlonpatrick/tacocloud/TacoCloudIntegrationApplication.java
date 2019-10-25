@@ -11,12 +11,7 @@ public class TacoCloudIntegrationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TacoCloudIntegrationApplication.class, args);
 	}
-	
-//	@Bean
-//	ApplicationRunner getAppRunner() {
-//		return new TacoCloudIntegrationApplicationRunner();
-//	}
-	
+		
 	@Bean
 	public RestTemplate restTemplate() {
 	  return new RestTemplate();

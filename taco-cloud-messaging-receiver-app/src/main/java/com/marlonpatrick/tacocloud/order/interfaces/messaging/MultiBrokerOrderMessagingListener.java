@@ -1,11 +1,11 @@
-package com.marlonpatrick.tacocloud.kitchen.order.interfaces.messaging;
+package com.marlonpatrick.tacocloud.order.interfaces.messaging;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import com.marlonpatrick.tacocloud.kitchen.order.Order;
+import com.marlonpatrick.tacocloud.order.Order;
 
 @Component
 class MultiBrokerOrderMessagingListener {
@@ -34,5 +34,4 @@ class MultiBrokerOrderMessagingListener {
 //		System.out.println("OrderListener...");
 //		System.out.println(order);
 //	}
-
 }

@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.kitchen.order.interfaces.messaging;
+package com.marlonpatrick.tacocloud.order.interfaces.messaging;
 
 public interface OrderMessagingReceiverGateway {
 

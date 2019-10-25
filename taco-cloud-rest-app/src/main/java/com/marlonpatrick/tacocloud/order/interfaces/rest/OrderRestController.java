@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -100,5 +101,12 @@ public class OrderRestController {
 		} catch (EmptyResultDataAccessException ex) {
 			//
 		}
+	}
+	
+	@GetMapping(path="/send/{id}", produces = "text/plain")
+	@Transactional(readOnly=true)
+	public String send(@PathVariable("id") Long id) {
+		this.orderApplicationService.sendOrder(id);
+		return "Message sent successfully";
 	}
 }

@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.kitchen.taco;
+package com.marlonpatrick.tacocloud.taco;
 
 import java.time.ZonedDateTime;
 import java.util.List;

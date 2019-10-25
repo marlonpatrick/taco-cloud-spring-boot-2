@@ -28,6 +28,6 @@ class RabbitOrderMessagingSender implements OrderMessagingSenderGateway {
 		messageProperties.setHeader("X_ORDER_SOURCE", "WEB");
 		Message message = messageConverter.toMessage(order, messageProperties);
 		
-		this.rabbitTemplate.send("tacocloud.order", "tacocloud.order.kitchens", message);
+		this.rabbitTemplate.send("tacocloud.order.exchange", "tacocloud.order.queue", message);
 	}
 }

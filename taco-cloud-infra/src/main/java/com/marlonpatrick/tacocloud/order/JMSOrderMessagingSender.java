@@ -3,10 +3,12 @@ package com.marlonpatrick.tacocloud.order;
 import javax.jms.Message;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@Primary
 class JMSOrderMessagingSender implements OrderMessagingSenderGateway {
 
 	@Autowired
