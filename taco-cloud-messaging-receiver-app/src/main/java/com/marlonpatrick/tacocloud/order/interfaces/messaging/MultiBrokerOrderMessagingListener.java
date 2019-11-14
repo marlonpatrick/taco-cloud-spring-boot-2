@@ -1,25 +1,23 @@
 package com.marlonpatrick.tacocloud.order.interfaces.messaging;
 
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.jms.annotation.JmsListener;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
-
 import com.marlonpatrick.tacocloud.order.Order;
+
+import org.springframework.jms.annotation.JmsListener;
+import org.springframework.stereotype.Component;
 
 @Component
 class MultiBrokerOrderMessagingListener {
 
 	@JmsListener(destination = "tacocloud.order.queue")
-	@RabbitListener(queues = "tacocloud.order.queue")
-	@KafkaListener(topics = "tacocloud.order.topic")
+	// @RabbitListener(queues = "tacocloud.order.queue")
+	// @KafkaListener(topics = "tacocloud.order.topic")
 	private void receiveOrder(Order order) {
 		System.out.println("OrderListener... ");
 		System.out.println(order);
 	}
 
 //	@KafkaListener(topics = "tacocloud.orders.topic")
-//	public void receiveOrder(Order order, ConsumerRecord<String, Order> record) {
+//	public void receiveOrder(Order order, ConsumerRecord<String, order> record) {
 //		log.info("Received from partition {} with timestamp {}", record.partition(), record.timestamp());
 //
 //		System.out.println("OrderListener...");
