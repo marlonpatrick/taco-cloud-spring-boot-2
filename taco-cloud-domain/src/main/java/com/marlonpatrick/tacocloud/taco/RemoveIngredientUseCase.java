@@ -2,16 +2,18 @@ package com.marlonpatrick.tacocloud.taco;
 
 import org.springframework.stereotype.Service;
 
+import reactor.core.publisher.Mono;
+
 @Service
 class RemoveIngredientUseCase {
 
-	private IngredientRepositoryGateway ingredientRepository;
+	private ReactiveIngredientRepositoryGateway ingredientRepository;
 
-	public RemoveIngredientUseCase(IngredientRepositoryGateway ingredientRepository) {
+	public RemoveIngredientUseCase(ReactiveIngredientRepositoryGateway ingredientRepository) {
 		this.ingredientRepository = ingredientRepository;
 	}
 
-	public void execute(String ingredientId){
-		this.ingredientRepository.deleteById(ingredientId);
+	public Mono<Void> execute(String ingredientId){
+		 return this.ingredientRepository.deleteById(ingredientId);
 	}
 }

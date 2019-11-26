@@ -55,7 +55,8 @@ public class DesignTacoWebController {
 
 		List<Ingredient> ingredients = new ArrayList<>();
 
-		this.ingredientApplicationService.findAll().forEach(i -> ingredients.add(i));
+		//TODO: reimplement reactively
+		this.ingredientApplicationService.findAll().toIterable().forEach(i -> ingredients.add(i));
 
 		IngredientTypes[] types = IngredientTypes.values();
 
@@ -77,7 +78,8 @@ public class DesignTacoWebController {
 			return "taco/designTaco";
 		}
 
-		Taco saved = this.tacoApplicationService.saveTaco(taco);
+		//TODO: reimplement reactively
+		Taco saved = this.tacoApplicationService.saveTaco(taco).block();
 		order.addTaco(saved);
 
 		return "redirect:/order/place/current";

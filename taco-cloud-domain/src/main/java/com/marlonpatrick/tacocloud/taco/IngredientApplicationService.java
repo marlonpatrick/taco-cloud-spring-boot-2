@@ -1,15 +1,16 @@
 package com.marlonpatrick.tacocloud.taco;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class IngredientApplicationService {
 
 	@Autowired
-	private IngredientRepositoryGateway ingredientRepositoryGateway;
+	private ReactiveIngredientRepositoryGateway ingredientRepositoryGateway;
 
 	@Autowired
 	private SaveIngredientUseCase saveIngredientUseCase;
@@ -17,19 +18,19 @@ public class IngredientApplicationService {
 	@Autowired
 	private RemoveIngredientUseCase removeIngredientUseCase;
 	
-	public Optional<Ingredient> findById(String id){
+	public Mono<Ingredient> findById(String id){
 		return ingredientRepositoryGateway.findById(id);
 	}
 
-	public Iterable<Ingredient> findAll(){
+	public Flux<Ingredient> findAll(){
 		return ingredientRepositoryGateway.findAll();
 	}
 
-	public Ingredient saveIngredient(Ingredient ingredient) {
+	public Mono<Ingredient> saveIngredient(Ingredient ingredient) {
 		return this.saveIngredientUseCase.execute(ingredient);
 	}
 	
-	public void removeIngredient(String ingredientId) {
-		this.removeIngredientUseCase.execute(ingredientId);
+	public Mono<Void> removeIngredient(String ingredientId) {
+		return this.removeIngredientUseCase.execute(ingredientId);
 	}
 }

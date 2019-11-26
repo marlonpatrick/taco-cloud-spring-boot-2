@@ -2,16 +2,18 @@ package com.marlonpatrick.tacocloud.taco;
 
 import org.springframework.stereotype.Service;
 
+import reactor.core.publisher.Mono;
+
 @Service
 class SaveTacoUseCase {
 
-	private TacoRepositoryGateway tacoRepository;
+	private ReactiveTacoRepositoryGateway tacoRepository;
 
-	public SaveTacoUseCase(TacoRepositoryGateway tacoRepository) {
+	public SaveTacoUseCase(ReactiveTacoRepositoryGateway tacoRepository) {
 		this.tacoRepository = tacoRepository;
 	}
 
-	public Taco execute(Taco taco){
+	public Mono<Taco> execute(Taco taco){
 		return this.tacoRepository.save(taco);
 	}
 }

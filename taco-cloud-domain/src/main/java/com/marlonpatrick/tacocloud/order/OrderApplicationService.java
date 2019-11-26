@@ -1,16 +1,17 @@
 package com.marlonpatrick.tacocloud.order;
 
-import java.time.ZonedDateTime;
-import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import reactor.core.publisher.Mono;
 
 @Service
 public class OrderApplicationService {
 
 	@Autowired
-	private OrderRepositoryGateway orderRepositoryGateway;
+	private ReactiveOrderRepositoryGateway orderRepositoryGateway;
 
 	@Autowired
 	private OrderMessagingSenderGateway orderMessagingGateway;
@@ -21,26 +22,20 @@ public class OrderApplicationService {
 	@Autowired
 	private RemoveOrderUseCase removeOrderUseCase;
 
-	public Optional<Order> findById(Long id){
+	public Mono<Order> findById(UUID id){
 		return this.orderRepositoryGateway.findById(id);
 	}
 
-	public Order saveOrder(Order order) {
+	public Mono<Order> saveOrder(Order order) {
 		return this.saveOrderUseCase.execute(order);
 	}
 	
-	public void removeOrder(Long orderId) {
-		this.removeOrderUseCase.execute(orderId);
+	public Mono<Void> removeOrder(UUID orderId) {
+		return this.removeOrderUseCase.execute(orderId);
 	}
 	
-	public void sendOrder(Long orderId) {
-		Optional<Order> optionalOrder = this.findById(orderId);
-		Order order = optionalOrder.get();
-		order.setPlacedAt(ZonedDateTime.now());
-		order.setTacos(null);//many errors, try resolve posteriorly
-//		for (Taco taco : order.getTacos()) {
-//			taco.getIngredients();
-//		}
-		orderMessagingGateway.sendOrder(order);
+	public void sendOrder(UUID orderId) {
+		//TODO: implement messaging reactively
+		orderMessagingGateway.sendOrder(this.findById(orderId).block());
 	}
 }

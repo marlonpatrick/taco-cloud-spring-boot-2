@@ -18,13 +18,13 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@ConditionalOnMissingBean(TacoRepositoryGateway.class)
-class JdbcTacoRepository implements TacoRepositoryGateway {
+@ConditionalOnMissingBean(ImperativeTacoRepositoryGateway.class)
+class JDBCTacoRepository implements ImperativeTacoRepositoryGateway {
 
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public JdbcTacoRepository(JdbcTemplate jdbcTemplate) {
+	public JDBCTacoRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 

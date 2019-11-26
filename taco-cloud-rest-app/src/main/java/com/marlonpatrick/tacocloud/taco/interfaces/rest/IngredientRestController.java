@@ -1,7 +1,5 @@
 package com.marlonpatrick.tacocloud.taco.interfaces.rest;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.marlonpatrick.tacocloud.taco.Ingredient;
 import com.marlonpatrick.tacocloud.taco.IngredientApplicationService;
 
+import reactor.core.publisher.Mono;
+
 @RestController
 @RequestMapping(path = "/ingredients", produces = "application/json")
 @CrossOrigin(origins = "*")
@@ -27,23 +27,27 @@ public class IngredientRestController {
 	private IngredientApplicationService ingredientApplicationService;
 
 	@GetMapping("/{id}")
-	public Optional<Ingredient> byId(@PathVariable("id") String id) {
+	public Mono<Ingredient> byId(@PathVariable("id") String id) {
+		//TODO: test reactive
 		return ingredientApplicationService.findById(id);
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Ingredient create(@RequestBody Ingredient ingredient) {
+	public Mono<Ingredient> create(@RequestBody Ingredient ingredient) {
+		//TODO: test reactive
 		return ingredientApplicationService.saveIngredient(ingredient);
 	}
 	
 	@PutMapping("/{id}")
 	public void update(@RequestBody Ingredient ingredient) {
+		//TODO: return Mono?
 		ingredientApplicationService.saveIngredient(ingredient);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") String id) {
+		//TODO: return Mono?
 		ingredientApplicationService.removeIngredient(id);
 	}
 }

@@ -1,17 +1,11 @@
 package com.marlonpatrick.tacocloud.taco.interfaces.rest;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
-import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.marlonpatrick.tacocloud.taco.Taco;
 import com.marlonpatrick.tacocloud.taco.TacoApplicationService;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping(path = "/tacos", produces = "application/json")
@@ -33,36 +30,31 @@ public class TacoRestController {
 	private TacoApplicationService tacoApplicationService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
-		Optional<Taco> optTaco = tacoApplicationService.findById(id);
-
-		if (optTaco.isPresent()) {
-			return new ResponseEntity<>(optTaco.get(), HttpStatus.OK);
-		}
-
-		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	public Mono<Taco> tacoById(@PathVariable("id") UUID id) {
+		return tacoApplicationService.findById(id);
 	}
 
 	@GetMapping("/recent")
-	public Iterable<Taco> recentTacos() {
+	public Flux<Taco> recentTacos() {
 		PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
-		return tacoApplicationService.findAllWithIngredients(page).getContent();
+		return tacoApplicationService.findAll(page);
 	}
 
 	@GetMapping("/recent/hateoas")
-	public Resources<TacoResource> recentTacosHateoas() {
+	public Flux<Taco> recentTacosHateoas() {
 		PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
-		List<Taco> tacos = tacoApplicationService.findAllWithIngredients(page).getContent();
+		return tacoApplicationService.findAll(page);
 
-		Resources<TacoResource> tacosResources = new Resources<>(TacoResourceAssembler.INSTANCE.toResources(tacos));
-		tacosResources.add(linkTo(methodOn(TacoRestController.class).recentTacosHateoas()).withRel("recents"));
-
-		return tacosResources;
+		//TODO: implement reactively 
+//		Resources<TacoResource> tacosResources = new Resources<>(TacoResourceAssembler.INSTANCE.toResources(tacos));
+//		tacosResources.add(linkTo(methodOn(TacoRestController.class).recentTacosHateoas()).withRel("recents"));
+//
+//		return tacosResources;
 	}
 
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Taco postTaco(@RequestBody Taco taco) {
+	public Mono<Taco> postTaco(@RequestBody Taco taco) {
 		return tacoApplicationService.saveTaco(taco);
 	}
 }

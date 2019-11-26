@@ -1,0 +1,12 @@
+{
+    "java.home": "/usr/lib/jvm/java-11-openjdk",
+    "maven.terminal.useJavaHome": true,      // use java.home setting
+    "java.configuration.updateBuildConfiguration": "disabled",    
+    "maven.terminal.favorites": [
+        {
+            "alias": "clean package -DskipTests",
+            "command": "clean package -DskipTests"
+        }
+    ],
+    "java.dependency.packagePresentation": "hierarchical"
+}

@@ -2,7 +2,7 @@ package com.marlonpatrick.tacocloud.taco;
 
 import java.util.Optional;
 
-interface IngredientRepositoryGateway {
+interface ImperativeIngredientRepositoryGateway {//extends CrudRepository
 
 	Optional<Ingredient> findById(String id);
 

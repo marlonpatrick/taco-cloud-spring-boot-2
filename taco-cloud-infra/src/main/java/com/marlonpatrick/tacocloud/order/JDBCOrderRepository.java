@@ -17,8 +17,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marlonpatrick.tacocloud.taco.Taco;
 
 @Repository
-@ConditionalOnMissingBean(OrderRepositoryGateway.class)
-class JdbcOrderRepository implements OrderRepositoryGateway {
+@ConditionalOnMissingBean(ImperativeOrderRepositoryGateway.class)
+class JDBCOrderRepository implements ImperativeOrderRepositoryGateway {
 
 	private SimpleJdbcInsert orderInserter;
 
@@ -27,7 +27,7 @@ class JdbcOrderRepository implements OrderRepositoryGateway {
 	private ObjectMapper objectMapper;
 
 	@Autowired
-	public JdbcOrderRepository(JdbcTemplate jdbc) {
+	public JDBCOrderRepository(JdbcTemplate jdbc) {
 		this.orderInserter = new SimpleJdbcInsert(jdbc).withTableName("Taco_Order").usingGeneratedKeyColumns("id");
 
 		this.orderTacoInserter = new SimpleJdbcInsert(jdbc).withTableName("Taco_Order_Tacos");
@@ -78,11 +78,6 @@ class JdbcOrderRepository implements OrderRepositoryGateway {
 
 	@Override
 	public boolean existsById(Long id) {
-		throw new UnsupportedOperationException("Not implemented");
-	}
-
-	@Override
-	public Iterable<Order> findAll() {
 		throw new UnsupportedOperationException("Not implemented");
 	}
 

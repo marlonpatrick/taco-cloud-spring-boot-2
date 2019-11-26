@@ -1,5 +1,7 @@
 package com.marlonpatrick.tacocloud.order.interfaces.rest;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,8 @@ import com.marlonpatrick.tacocloud.order.OrderApplicationService;
 import com.marlonpatrick.tacocloud.taco.Ingredient;
 import com.marlonpatrick.tacocloud.taco.Taco;
 
+import reactor.core.publisher.Mono;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping(path = "/orders", produces = "application/json")
@@ -31,7 +35,7 @@ public class OrderRestController {
 
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Order postOrder(@RequestBody Order order) {
+	public Mono<Order> postOrder(@RequestBody Order order) {
 		return orderApplicationService.saveOrder(order);
 	}
 
@@ -43,7 +47,8 @@ public class OrderRestController {
 		
 		System.out.println("EmailOrder\n" + emailOrder);
 		
-		Order order = orderApplicationService.findById(2L).orElse(null);
+		//TODO: implement reactively
+		Order order = orderApplicationService.findById(UUID.fromString("get uuid")).block();
 		
 		for (Taco taco : order.getTacos()) {
 			for (Ingredient ingredient : taco.getIngredients()) {
@@ -55,14 +60,15 @@ public class OrderRestController {
 	}
 
 	@PutMapping(path = "/{orderId}", consumes = "application/json")
-	public Order putOrder(@RequestBody Order order) {
+	public Mono<Order> putOrder(@RequestBody Order order) {
 		return orderApplicationService.saveOrder(order);
 	}
 
 	@PatchMapping(path = "/{orderId}", consumes = "application/json")
-	public Order patchOrder(@PathVariable("orderId") Long orderId, @RequestBody Order patchOrder) {
+	public Mono<Order> patchOrder(@PathVariable("orderId") UUID orderId, @RequestBody Order patchOrder) {
 
-		Order order = orderApplicationService.findById(orderId).get();
+		//implement reactively
+		Order order = orderApplicationService.findById(orderId).block();
 
 		if (patchOrder.getDeliveryName() != null) {
 			order.setDeliveryName(patchOrder.getDeliveryName());
@@ -95,8 +101,9 @@ public class OrderRestController {
 
 	@DeleteMapping("/{orderId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void removeOrder(@PathVariable("orderId") Long orderId) {
+	public void removeOrder(@PathVariable("orderId") UUID orderId) {
 		try {
+			//TODO; return Mono?
 			orderApplicationService.removeOrder(orderId);
 		} catch (EmptyResultDataAccessException ex) {
 			//
@@ -105,7 +112,7 @@ public class OrderRestController {
 	
 	@GetMapping(path="/send/{id}", produces = "text/plain")
 	@Transactional(readOnly=true)
-	public String send(@PathVariable("id") Long id) {
+	public String send(@PathVariable("id") UUID id) {
 		this.orderApplicationService.sendOrder(id);
 		return "Message sent successfully";
 	}

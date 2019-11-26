@@ -13,7 +13,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @Primary
 @RepositoryRestResource(path="tacos", collectionResourceRel="tacos")
-interface JPATacoRepository extends TacoRepositoryGateway, Repository<Taco, Long> {
+interface JPATacoRepository extends ImperativeTacoRepositoryGateway, Repository<Taco, Long> {
 
 	//test spring data rest
 	Page<Taco> findAll(Pageable pageable);

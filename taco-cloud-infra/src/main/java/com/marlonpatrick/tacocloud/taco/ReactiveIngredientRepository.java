@@ -6,6 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @Primary
 @RepositoryRestResource
-interface JPAIngredientRepository extends ImperativeIngredientRepositoryGateway, Repository<Ingredient, String> {
+interface ReactiveIngredientRepository extends ReactiveIngredientRepositoryGateway, Repository<Ingredient, String> {
 
 }

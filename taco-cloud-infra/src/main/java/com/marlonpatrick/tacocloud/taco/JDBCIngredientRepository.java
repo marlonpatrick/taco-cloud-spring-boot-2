@@ -10,13 +10,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@ConditionalOnMissingBean(IngredientRepositoryGateway.class)
-class JdbcIngredientRepository implements IngredientRepositoryGateway {
+@ConditionalOnMissingBean(ImperativeIngredientRepositoryGateway.class)
+class JDBCIngredientRepository implements ImperativeIngredientRepositoryGateway {
 
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public JdbcIngredientRepository(JdbcTemplate jdbcTemplate) {
+	public JDBCIngredientRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 

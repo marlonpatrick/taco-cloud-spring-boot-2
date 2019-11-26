@@ -1,6 +1,4 @@
 
-- There is a way to specify @Primary through enviroment variable or any external configuration?
-
 --------------------------------------------
 ./bin/artemis create --user taco --password cloud --role admin --require-login instances/taco-cloud
 
@@ -9,6 +7,14 @@ instances/taco-cloud/bin/artemis run
 instances/taco-cloud/bin/artemis queue create --user taco --password cloud --auto-create-address --address tacocloud.order.queue --name tacocloud.order.queue --preserve-on-no-consumers --durable --anycast --url tcp://localhost:61616
 
 --------------------------------------------
+
+create keyspace tacocloud with replication={'class':'SimpleStrategy', 'replication_factor':1} and durable_writes=true;
+
+--------------------------------------------
+
+There is a way to specify @Primary through enviroment variable or any external configuration?
+
+
 controller, presenter, view model?
 
 	The job of the Presenter is to repackage the OutputData into viewable form as the ViewModel , which is yet another plain old Java object. 

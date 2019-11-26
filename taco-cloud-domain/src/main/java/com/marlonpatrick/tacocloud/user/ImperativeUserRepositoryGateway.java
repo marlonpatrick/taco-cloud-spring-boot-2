@@ -2,7 +2,7 @@ package com.marlonpatrick.tacocloud.user;
 
 import java.util.Optional;
 
-public interface UserRepositoryGateway {
+public interface ImperativeUserRepositoryGateway {//extends CrudRepository
 
 	public Optional<User> findById(Long id);
 
@@ -15,7 +15,7 @@ public interface UserRepositoryGateway {
 	public User findByUsername(String username);
 }
 
-interface FullUserRepositoryGateway extends UserRepositoryGateway{
+interface FullImperativeUserRepositoryGateway extends ImperativeUserRepositoryGateway{
 
 	public <S extends User> S save(S entity);
 

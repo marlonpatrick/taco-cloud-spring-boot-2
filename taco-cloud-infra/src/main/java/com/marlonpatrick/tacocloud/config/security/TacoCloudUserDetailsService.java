@@ -6,22 +6,24 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.marlonpatrick.tacocloud.user.ReactiveUserRepositoryGateway;
 import com.marlonpatrick.tacocloud.user.User;
-import com.marlonpatrick.tacocloud.user.UserRepositoryGateway;
 
 @Service
 class TacoCloudUserDetailsService implements UserDetailsService {
 
-	private UserRepositoryGateway userRepository;
+	private ReactiveUserRepositoryGateway userRepository;
 
 	@Autowired
-	TacoCloudUserDetailsService(UserRepositoryGateway userRepository) {
+	TacoCloudUserDetailsService(ReactiveUserRepositoryGateway userRepository) {
 		this.userRepository = userRepository;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = this.userRepository.findByUsername(username);
+		
+		//TODO: implement reactively
+		User user = this.userRepository.findByUsername(username).block();
 
 		if (user == null) {
 			throw new UsernameNotFoundException("User '" + username + "' not found");

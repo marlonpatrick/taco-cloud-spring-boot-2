@@ -10,16 +10,16 @@ import com.marlonpatrick.tacocloud.taco.IngredientApplicationService;
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
-  private IngredientApplicationService ingredientApplicationService;
+	private IngredientApplicationService ingredientApplicationService;
 
-  @Autowired
-  public IngredientByIdConverter(IngredientApplicationService ingredientApplicationService) {
-    this.ingredientApplicationService = ingredientApplicationService;
-  }
-  
-  @Override
-  public Ingredient convert(String id) {
-    return this.ingredientApplicationService.findById(id).orElse(null);
-  }
+	@Autowired
+	public IngredientByIdConverter(IngredientApplicationService ingredientApplicationService) {
+		this.ingredientApplicationService = ingredientApplicationService;
+	}
 
+	@Override
+	public Ingredient convert(String id) {
+		// TODO: implement reactively
+		return this.ingredientApplicationService.findById(id).block();
+	}
 }

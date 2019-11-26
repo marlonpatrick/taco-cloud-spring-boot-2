@@ -1,0 +1,32 @@
+{
+    "configurations": [
+
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TacoCloudRestApplication",
+            "request": "launch",
+            "mainClass": "com.marlonpatrick.tacocloud.TacoCloudRestApplication",
+            "projectName": "taco-cloud-rest-app"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TacoCloudMessagingApplication<taco-cloud-messaging-receiver-app>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.marlonpatrick.tacocloud.TacoCloudMessagingApplication",
+            "projectName": "taco-cloud-messaging-receiver-app",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TacoCloudRestApplication<taco-cloud-rest-app>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.marlonpatrick.tacocloud.TacoCloudRestApplication",
+            "projectName": "taco-cloud-rest-app",
+            "args": ""
+        }
+    ]
+}

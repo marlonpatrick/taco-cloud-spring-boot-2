@@ -2,16 +2,18 @@ package com.marlonpatrick.tacocloud.order;
 
 import org.springframework.stereotype.Service;
 
+import reactor.core.publisher.Mono;
+
 @Service
 class SaveOrderUseCase {
 
-	private OrderRepositoryGateway orderRepository;
+	private ReactiveOrderRepositoryGateway orderRepository;
 
-	public SaveOrderUseCase(OrderRepositoryGateway orderRepository) {
+	public SaveOrderUseCase(ReactiveOrderRepositoryGateway orderRepository) {
 		this.orderRepository = orderRepository;
 	}
 
-	public Order execute(Order order){
+	public Mono<Order> execute(Order order){
 		return this.orderRepository.save(order);
 	}
 }
