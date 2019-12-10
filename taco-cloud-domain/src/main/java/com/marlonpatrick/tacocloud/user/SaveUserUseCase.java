@@ -2,16 +2,18 @@ package com.marlonpatrick.tacocloud.user;
 
 import org.springframework.stereotype.Service;
 
+import reactor.core.publisher.Mono;
+
 @Service
 class SaveUserUseCase {
 
-	private FullImperativeUserRepositoryGateway userRepository;
+	private FullReactiveUserRepositoryGateway userRepository;
 
-	public SaveUserUseCase(FullImperativeUserRepositoryGateway userRepository) {
+	public SaveUserUseCase(FullReactiveUserRepositoryGateway userRepository) {
 		this.userRepository = userRepository;
 	}
 
-	public User execute(User user){
+	public Mono<User> execute(User user){
 		return this.userRepository.save(user);
 	}
 }

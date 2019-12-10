@@ -36,6 +36,7 @@ public class OrderRestController {
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Mono<Order> postOrder(@RequestBody Order order) {
+		//TODO: test reactive
 		return orderApplicationService.saveOrder(order);
 	}
 
@@ -61,13 +62,14 @@ public class OrderRestController {
 
 	@PutMapping(path = "/{orderId}", consumes = "application/json")
 	public Mono<Order> putOrder(@RequestBody Order order) {
+		//TODO: test reactive
 		return orderApplicationService.saveOrder(order);
 	}
 
 	@PatchMapping(path = "/{orderId}", consumes = "application/json")
 	public Mono<Order> patchOrder(@PathVariable("orderId") UUID orderId, @RequestBody Order patchOrder) {
 
-		//implement reactively
+		//TODO: implement reactively
 		Order order = orderApplicationService.findById(orderId).block();
 
 		if (patchOrder.getDeliveryName() != null) {
@@ -95,6 +97,7 @@ public class OrderRestController {
 			order.setCcCVV(patchOrder.getCcCVV());
 		}
 
+		//TODO: test reactive
 		return orderApplicationService.saveOrder(order);
 
 	}

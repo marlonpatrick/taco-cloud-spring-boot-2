@@ -10,19 +10,19 @@ import reactor.core.publisher.Mono;
 
 public interface ReactiveUserRepositoryGateway {//extends CrudRepository
 	
-	Mono<Taco> findById(UUID id);
+	Mono<User> findById(UUID id);
 
-	Mono<Taco> findById(Publisher<UUID> id);
+	Mono<User> findById(Publisher<UUID> id);
 
 	Mono<Boolean> existsById(UUID id);
 
 	Mono<Boolean> existsById(Publisher<UUID> id);
 
-	Flux<Taco> findAll();
+	Flux<User> findAll();
 
-	Flux<Taco> findAllById(Iterable<UUID> ids);
+	Flux<User> findAllById(Iterable<UUID> ids);
 
-	Flux<Taco> findAllById(Publisher<UUID> idStream);
+	Flux<User> findAllById(Publisher<UUID> idStream);
 
 	Mono<Long> count();
 
@@ -31,25 +31,25 @@ public interface ReactiveUserRepositoryGateway {//extends CrudRepository
 
 interface FullReactiveUserRepositoryGateway extends ReactiveUserRepositoryGateway{
 
-	<S extends Taco> Mono<S> save(S entity);
+	<S extends User> Mono<S> save(S entity);
 
-	<S extends Taco> Flux<S> saveAll(Iterable<S> entities);
+	<S extends User> Flux<S> saveAll(Iterable<S> entities);
 
-	<S extends Taco> Flux<S> saveAll(Publisher<S> entityStream);
+	<S extends User> Flux<S> saveAll(Publisher<S> entityStream);
 
-	<S extends Taco> Mono<S> insert(S entity);
+	<S extends User> Mono<S> insert(S entity);
 
-	<S extends Taco> Flux<S> insert(Iterable<S> entities);
+	<S extends User> Flux<S> insert(Iterable<S> entities);
 
-	<S extends Taco> Flux<S> insert(Publisher<S> entities);
+	<S extends User> Flux<S> insert(Publisher<S> entities);
 
 	Mono<Void> deleteById(UUID id);
 
 	Mono<Void> deleteById(Publisher<UUID> id);
 
-	Mono<Void> delete(Taco entity);
+	Mono<Void> delete(User entity);
 
-	Mono<Void> deleteAll(Iterable<? extends Taco> entities);
+	Mono<Void> deleteAll(Iterable<? extends User> entities);
 
-	Mono<Void> deleteAll(Publisher<? extends Taco> entityStream);
+	Mono<Void> deleteAll(Publisher<? extends User> entityStream);
 }

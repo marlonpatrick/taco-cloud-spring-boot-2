@@ -59,7 +59,8 @@ public class PlaceOrderController {
 
 		order.setUser(user);
 
-		this.orderApplicationService.saveOrder(order);
+		//TODO: implement reactive
+		this.orderApplicationService.saveOrder(order).block();
 
 		sessionStatus.setComplete();
 

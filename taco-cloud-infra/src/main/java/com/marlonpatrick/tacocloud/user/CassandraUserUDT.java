@@ -1,4 +1,4 @@
-package com.marlonpatrick.tacocloud.taco;
+package com.marlonpatrick.tacocloud.user;
 
 import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 

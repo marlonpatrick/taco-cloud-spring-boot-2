@@ -29,7 +29,8 @@ public class RegisterUserController {
 	@PostMapping
 	public String processRegisterUser(RegisterUserForm form) {
 		
-		this.userApplicationService.saveUser(form.toUser(this.passwordEncoder));
+		//TODO:implement reactively
+		this.userApplicationService.saveUser(form.toUser(this.passwordEncoder)).block();
 	    return "redirect:/login";
 	}
 
