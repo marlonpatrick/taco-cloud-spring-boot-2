@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +20,13 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import com.datastax.driver.core.utils.UUIDs;
 import com.marlonpatrick.tacocloud.taco.Taco;
 import com.marlonpatrick.tacocloud.user.User;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 
 @Data
 @Entity
@@ -33,7 +37,7 @@ public class Order implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private UUID id = UUIDs.timeBased();
 
 	private ZonedDateTime placedAt;
 
@@ -61,6 +65,7 @@ public class Order implements Serializable{
 	@Digits(integer = 3, fraction = 0, message = "Invalid CVV")
 	private String ccCVV;
 
+	@Setter(AccessLevel.NONE)
 	@ManyToMany(targetEntity = Taco.class)
 	private List<Taco> tacos = new ArrayList<>();
 	

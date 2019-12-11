@@ -1,14 +1,16 @@
-package com.marlonpatrick.tacocloud.taco;
+package com.marlonpatrick.tacocloud.order;
 
 import java.util.List;
 
 import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 
+import com.marlonpatrick.tacocloud.taco.CassandraIngredientUDT;
+
 import lombok.Data;
 
 @Data
 @UserDefinedType("taco")
-public class CassandraTacoUDT {
+class CassandraTacoUDT {
 
 	private final String name;
 	

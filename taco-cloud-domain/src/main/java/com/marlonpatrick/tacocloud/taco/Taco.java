@@ -2,6 +2,7 @@ package com.marlonpatrick.tacocloud.taco;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -34,7 +35,7 @@ public class Taco implements Serializable {
 
 	@ManyToMany(targetEntity = Ingredient.class, fetch=FetchType.LAZY)
 	@Size(min = 1, message = "You must choose at least 1 ingredient")
-	private List<Ingredient> ingredients;
+	private List<Ingredient> ingredients = new ArrayList<>();
 
 	@PrePersist
 	void createdAt() {

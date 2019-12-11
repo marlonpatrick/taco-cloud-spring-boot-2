@@ -3,19 +3,37 @@ package com.marlonpatrick.tacocloud.order;
 import java.util.UUID;
 import java.util.concurrent.Flow.Publisher;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+//TODO: validate @RepositoryRestResource reactive
 @RepositoryRestResource
 class ReactiveOrderRepository implements ReactiveOrderRepositoryGateway, Repository<Order, UUID> {
 
+	
+//	PENDENCIAS:
+//		- Substituir o campo Order.id (Long) por Order.id (UUID) ---->>>>>>> OK
+	
+//		- Criar o ReactiveCassandraOrderRepository como interface mapeando a classe CassandraOrder
+	
+//		- Injetar ReactiveCassandraOrderRepository aqui nesta classe
+	
+//		- Fazer o mapper entre Order e CassandraOrder aqui nesta classe e usar ReactiveCassandraOrderRepository 
+	
+	@Autowired
+	private ReactiveCassandraOrderRepository reactiveCassandraOrderRepository;
+		
 	@Override
+	@SuppressWarnings("unchecked")
 	public <S extends Order> Mono<S> save(S entity) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Mono<CassandraOrder> monoCassandraOrder = reactiveCassandraOrderRepository.save(CassandraDomainOrderMapper.fromDomain(entity));
+		
+		return (Mono<S>) monoCassandraOrder.map(co -> co.toOrder());
 	}
 
 	@Override

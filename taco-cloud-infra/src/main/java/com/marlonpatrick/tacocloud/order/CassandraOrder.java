@@ -17,7 +17,9 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 import com.datastax.driver.core.utils.UUIDs;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 
 @Data
 @Table("tacoorders")
@@ -55,6 +57,7 @@ public class CassandraOrder implements Serializable{
 	private String ccCVV;
 
 	@Column("tacos")
+	@Setter(AccessLevel.NONE)
 	private List<CassandraTacoUDT> tacos = new ArrayList<>();
 	
 	@Column("user")
@@ -62,5 +65,9 @@ public class CassandraOrder implements Serializable{
 
 	public void addTaco(CassandraTacoUDT taco) {
 		this.tacos.add(taco);
+	}
+	
+	public Order toOrder() {
+		return null;
 	}
 }
