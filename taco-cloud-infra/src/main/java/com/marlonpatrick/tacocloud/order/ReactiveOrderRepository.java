@@ -1,7 +1,10 @@
 package com.marlonpatrick.tacocloud.order;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.Flow.Publisher;
+import java.util.concurrent.Flow.Subscriber;
+import java.util.concurrent.Flow.Subscription;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.Repository;
@@ -13,16 +16,6 @@ import reactor.core.publisher.Mono;
 //TODO: validate @RepositoryRestResource reactive
 @RepositoryRestResource
 class ReactiveOrderRepository implements ReactiveOrderRepositoryGateway, Repository<Order, UUID> {
-
-	
-//	PENDENCIAS:
-//		- Substituir o campo Order.id (Long) por Order.id (UUID) ---->>>>>>> OK
-	
-//		- Criar o ReactiveCassandraOrderRepository como interface mapeando a classe CassandraOrder
-	
-//		- Injetar ReactiveCassandraOrderRepository aqui nesta classe
-	
-//		- Fazer o mapper entre Order e CassandraOrder aqui nesta classe e usar ReactiveCassandraOrderRepository 
 	
 	@Autowired
 	private ReactiveCassandraOrderRepository reactiveCassandraOrderRepository;
@@ -37,13 +30,20 @@ class ReactiveOrderRepository implements ReactiveOrderRepositoryGateway, Reposit
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public <S extends Order> Flux<S> saveAll(Iterable<S> entities) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ArrayList<CassandraOrder> cassandraOrders = new ArrayList<>();
+		
+		entities.forEach(e -> cassandraOrders.add(CassandraDomainOrderMapper.fromDomain(e)));
+		
+		Flux<CassandraOrder> fluxCassandraOrder = reactiveCassandraOrderRepository.saveAll(cassandraOrders);
+				
+		return (Flux<S>) fluxCassandraOrder.map(co -> co.toOrder());
 	}
 
 	@Override
-	public <S extends Order> Flux<S> saveAll(Publisher<S> entityStream) {
+	public <S extends Order> Flux<S> saveAll(Publisher<S> entityStream) {		
 		// TODO Auto-generated method stub
 		return null;
 	}
